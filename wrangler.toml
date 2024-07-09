@@ -1,0 +1,7 @@
+name = "r2-uploader-example-worker"
+compatibility_date = "2023-12-01"
+
+# change this to your own bucket
+r2_buckets = [
+    {binding = "R2_BUCKET", bucket_name = "test"}
+]

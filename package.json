@@ -1,0 +1,14 @@
+{
+  "name": "r2-uploader-example-worker",
+  "scripts": {
+    "dev": "wrangler dev src/index.ts --port 4897",
+    "deploy": "wrangler deploy --minify src/index.ts"
+  },
+  "dependencies": {
+    "hono": "^4.4.12"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240529.0",
+    "wrangler": "^3.57.2"
+  }
+}
