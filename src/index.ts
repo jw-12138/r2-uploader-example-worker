@@ -1,62 +1,38 @@
-import {Context, Hono} from 'hono'
+import {Hono} from 'hono'
 import {cors} from 'hono/cors'
+
 import Get from './routes/get'
 import Patch from './routes/patch'
 import Put from './routes/put'
 import Delete from "./routes/delete"
 
+import MpuCreate from './routes/mpu/create'
+import MpuParts from './routes/mpu/parts'
+import MpuAbort from './routes/mpu/abort'
+import MpuComplete from './routes/mpu/complete'
+import MpuSupport from './routes/mpu/support'
+
+import checkHeader from "./middleware/checkHeader"
+
 const app = new Hono()
 
-const validHeader = function (c: Context) {
-  if(!c.env.AUTH_KEY_SECRET){
-    return c.text('AUTH_KEY_SECRET is not set', 403)
-  }
-
-  const useKey = c.req.header('x-api-key') === c.env.AUTH_KEY_SECRET
-
-  if (c.req.method === 'GET') {
-    if (c.env.PRIVATE_BUCKET) {
-      return useKey
-    } else {
-      return true
-    }
-  }
-
-  if (c.req.method === 'PATCH' || c.req.method === 'PUT' || c.req.method === 'DELETE') {
-    return useKey
-  }
-
-  if (c.req.method === 'OPTIONS') {
-    return true
-  }
-
-  return false
-}
-
-app.use(async function (c, next) {
-  let valid = validHeader(c)
-
-  if (valid) {
-    console.log('Header is valid')
-    await next()
-  }
-
-  return c.json({
-    status: 401,
-    message: 'Unauthorized'
-  })
-})
+app.use('*', checkHeader)
 
 app.use(cors())
 
 app.get('/', (c) => c.text('Hello R2!'))
 
+// multipart upload operations
+app.get('/support_mpu', MpuSupport)
+app.post('/mpu/create/:key{.*}', MpuCreate)
+app.put('/mpu/:key{.*}', MpuParts)
+app.delete('/mpu/:key{.*}', MpuAbort)
+app.post('/mpu/complete/:key{.*}', MpuComplete)
+
+// normal r2 operations
 app.get('/:key{.*}', Get)
-
 app.patch('/', Patch)
-
 app.put('/:key{.*}', Put)
-
 app.delete('/:key{.*}', Delete)
 
 app.all('*', c => {
