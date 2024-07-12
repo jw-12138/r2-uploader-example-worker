@@ -20,7 +20,7 @@ app.use('*', checkHeader)
 
 app.use(cors())
 
-app.get('/', (c) => c.text('Hello R2!'))
+app.get('/', (c) => c.text('Hello R2! v2024.07.12'))
 
 // multipart upload operations
 app.get('/support_mpu', MpuSupport)
