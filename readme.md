@@ -15,7 +15,7 @@ This is an example worker for the R2 Uploader, you can use the code in the dist 
     npm install
    ```
    
-3. Edit `wrangler.toml`, change `r2_buckets` to your binds
+3. Edit `wrangler.toml`, change `r2_buckets` to your bindings
 
 4. Deploy the code
    ```shell
