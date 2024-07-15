@@ -1,4 +1,4 @@
-This is an example worker for the R2 Uploader, you can use the code in the dist directly, or build the code yourself.
+This is an example worker for the R2 Uploader, you can use the code in the `./dist` folder directly, or build the code yourself.
 
 ### Requirements
 
