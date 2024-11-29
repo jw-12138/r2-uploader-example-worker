@@ -1,4 +1,4 @@
-This is an example worker for the R2 Uploader, you can use the code in the dist directly, or build the code yourself.
+This is an example worker for the R2 Uploader, you can use the code in the `./dist` folder directly, or build the code yourself.
 
 ### Requirements
 
@@ -15,7 +15,7 @@ This is an example worker for the R2 Uploader, you can use the code in the dist 
     npm install
    ```
    
-3. Edit `wrangler.toml`, change `r2_buckets` to your bindings
+3. Edit `wrangler.toml`, change `r2_buckets -> bucket_name` to your own bucket name
 
 4. Deploy the code
    ```shell
