@@ -14,13 +14,17 @@ import MpuSupport from './routes/mpu/support'
 
 import checkHeader from "./middleware/checkHeader"
 
-const app = new Hono()
+const app = new Hono<{
+  Bindings: {
+    R2_BUCKET: R2Bucket
+  }
+}>()
 
 app.use('*', checkHeader)
 
 app.use(cors())
 
-app.get('/', (c) => c.text('Hello R2! v2024.07.12'))
+app.get('/', (c) => c.text('Hello R2! v2024.11.28'))
 
 // multipart upload operations
 app.get('/support_mpu', MpuSupport)

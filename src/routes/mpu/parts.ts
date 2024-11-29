@@ -1,13 +1,9 @@
 import {Context} from "hono"
 
-interface Env {
-  R2_BUCKET: R2Bucket;
-}
-
 export default async function (c: Context) {
-  let uploadId = c.req.query('uploadId')
-  let partNumberStr = c.req.query('partNumber') || ''
-  let key = c.req.param('key')
+  const uploadId = c.req.query('uploadId')
+  const partNumberStr = c.req.query('partNumber') || ''
+  const key = c.req.param('key')
 
   if (!uploadId) {
     return c.text('uploadId is required', 400)
@@ -17,7 +13,7 @@ export default async function (c: Context) {
     return c.text('partNumber is required', 400)
   }
 
-  let partNumber = Number(partNumberStr)
+  const partNumber = Number(partNumberStr)
 
   if (isNaN(partNumber)) {
     return c.text('partNumber must be a number', 400)

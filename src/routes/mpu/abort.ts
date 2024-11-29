@@ -1,12 +1,8 @@
 import {Context} from "hono"
 
-interface Env {
-  R2_BUCKET: R2Bucket;
-}
-
 export default async function (c: Context) {
-  let key = c.req.param('key')
-  let uploadId = c.req.query('uploadId')
+  const key = c.req.param('key')
+  const uploadId = c.req.query('uploadId')
 
   if (!uploadId) {
     return c.text('uploadId is required', 400)
