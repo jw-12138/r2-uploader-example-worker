@@ -26,7 +26,7 @@ app.use('*', checkHeader)
 
 app.use(cors())
 
-app.get('/', (c) => c.text('Hello R2! v2024.11.28'))
+app.get('/', (c) => c.text('Hello R2! v2025.01.13'))
 
 // multipart upload operations
 app.post('/mpu/create/:key{.*}', MpuCreate)
