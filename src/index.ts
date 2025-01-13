@@ -20,13 +20,10 @@ const app = new Hono<{
   }
 }>()
 
-app.get('/support_mpu', MpuSupport)
-
-app.use('*', checkHeader)
-
 app.use(cors())
-
+app.get('/support_mpu', MpuSupport)
 app.get('/', (c) => c.text('Hello R2! v2025.01.13'))
+app.use('*', checkHeader)
 
 // multipart upload operations
 app.post('/mpu/create/:key{.*}', MpuCreate)
